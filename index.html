@@ -6,9 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     :root {
-      --bg: #020617;         /* preto azulado */
+      --bg: #020617;          /* preto azulado */
       --bg-card: #020617;
-      --azul-royal: #2563eb; /* azul royal */
+      --azul-royal: #2563eb;  /* azul royal */
       --azul-escuro: #0f172a;
       --texto: #e5e7eb;
       --texto-suave: #9ca3af;
@@ -24,8 +24,7 @@
     body {
       margin: 0;
       padding: 0;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-        sans-serif;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
       color: var(--texto);
     }
@@ -124,8 +123,7 @@
 
     .bio-card {
       border-radius: 1rem;
-      border: 1px solid var(--borda;
-      );
+      border: 1px solid var(--borda);
       background: linear-gradient(135deg, #020617, #020617, #111827);
       padding: 1.5rem;
       display: flex;
@@ -192,6 +190,12 @@
       z-index: 1;
       font-size: 0.9rem;
       color: var(--texto);
+      text-align: justify;
+    }
+
+    .bio-body p {
+      margin-top: 0.25rem;
+      margin-bottom: 0.25rem;
     }
 
     .bio-highlight {
@@ -204,6 +208,7 @@
       z-index: 1;
       font-size: 0.8rem;
       color: var(--texto-suave);
+      text-align: justify;
     }
 
     .login-card {
@@ -233,7 +238,9 @@
       color: var(--texto-suave);
     }
 
-    input, textarea, select {
+    input,
+    textarea,
+    select {
       background: #020617;
       border-radius: 0.6rem;
       border: 1px solid var(--borda);
@@ -244,7 +251,9 @@
       transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    input:focus, textarea:focus, select:focus {
+    input:focus,
+    textarea:focus,
+    select:focus {
       border-color: var(--azul-royal);
       box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.6);
     }
@@ -550,9 +559,16 @@
     }
 
     @media print {
-      body {
-        background: #ffffff;
+      @page {
+        size: A4;
+        margin: 12mm;
       }
+
+      html, body {
+        background: #ffffff;
+        height: auto;
+      }
+
       .topbar,
       .sidebar,
       .actions,
@@ -560,25 +576,30 @@
       .form-panel {
         display: none !important;
       }
+
       main {
         padding: 0;
       }
+
       .screen {
         padding: 0;
         border: none;
         box-shadow: none;
         border-radius: 0;
       }
+
       .preview-panel {
         border: none;
         padding: 0;
         background: #ffffff;
         max-height: none;
       }
+
       .preview-paper {
         box-shadow: none;
         max-width: 100%;
         padding: 1.2rem;
+        page-break-after: avoid;
       }
     }
   </style>
@@ -590,7 +611,7 @@
         <div class="brand-logo">B</div>
         <div>
           <div class="brand-text-title">BTX-Tech | Documentos Clínicos</div>
-          <div class="brand-text-sub">Gerador de ficha clínica, receituário, orçamento e atestado</div>
+          <div class="brand-text-sub">Gerador de ficha clínica, receituário, orçamento, laudo e atestado</div>
         </div>
       </div>
       <div class="user-info-top" id="topUserInfo">
@@ -606,7 +627,7 @@
             <article class="bio-card">
               <div class="bio-header">
                 <div class="bio-photo">
-                  <img src="IMG_20251120_170412_259.webp" alt="Foto do cirurgião-dentista" />
+                  <img src="IMG_20251120_170412_259.webp" alt="Foto do profissional de saúde" />
                 </div>
                 <div class="bio-title">
                   <h1>Dr. Orlando Abreu Gomes da Silva</h1>
@@ -632,7 +653,7 @@
               <div class="bio-footer">
                 Este gerador de documentos clínicos foi criado para simplificar o dia a dia do
                 profissional de saúde: ficha clínica clara, receituário organizado, orçamento
-                objetivo e atestado formal, prontos para impressão ou PDF.
+                objetivo, laudo estruturado e atestado formal, prontos para impressão ou PDF.
               </div>
             </article>
 
@@ -645,18 +666,20 @@
               <form id="loginForm">
                 <div class="field-group">
                   <label for="profNome">Nome completo</label>
-                  <input id="profNome" type="text" placeholder="Ex.: Dr. Orlando Abreu Gomes da Silva" required />
+                  <input id="profNome" type="text"
+                         placeholder="Ex.: Dr. Orlando Abreu Gomes da Silva" required />
                 </div>
 
                 <div class="field-group">
                   <label for="profEspecialidade">Especialidade principal</label>
-                  <input id="profEspecialidade" type="text" placeholder="Ex.: Cirurgião-Dentista / Bucomaxilofacial" />
+                  <input id="profEspecialidade" type="text"
+                         placeholder="Ex.: Cirurgião-Dentista / Bucomaxilofacial" />
                 </div>
 
                 <div class="form-row-inline">
                   <div class="field-group">
                     <label for="profConselho">Conselho de classe</label>
-                    <input id="profConselho" type="text" placeholder="Ex.: CRO-PA" />
+                    <input id="profConselho" type="text" placeholder="Ex.: CRO-PA / CRM-PA" />
                   </div>
                   <div class="field-group">
                     <label for="profNumeroConselho">Número do registro</label>
@@ -666,7 +689,8 @@
 
                 <div class="field-group">
                   <label for="profEndereco">Endereço profissional</label>
-                  <input id="profEndereco" type="text" placeholder="Rua, número, bairro, cidade - UF" />
+                  <input id="profEndereco" type="text"
+                         placeholder="Rua, número, bairro, cidade - UF" />
                 </div>
 
                 <div class="form-row-inline">
@@ -698,18 +722,27 @@
           <div class="app-layout">
             <nav class="sidebar no-print">
               <div class="sidebar-title">Documentos</div>
+
               <button class="nav-button active" data-tab="ficha" onclick="selecionarAba('ficha')">
                 Ficha clínica
                 <span class="badge">Paciente</span>
               </button>
+
               <button class="nav-button" data-tab="receita" onclick="selecionarAba('receita')">
                 Receituário
                 <span class="badge">Medicamentos</span>
               </button>
+
               <button class="nav-button" data-tab="orcamento" onclick="selecionarAba('orcamento')">
                 Orçamento
                 <span class="badge">Procedimentos</span>
               </button>
+
+              <button class="nav-button" data-tab="laudo" onclick="selecionarAba('laudo')">
+                Laudo
+                <span class="badge">Relatório</span>
+              </button>
+
               <button class="nav-button" data-tab="atestado" onclick="selecionarAba('atestado')">
                 Atestado
                 <span class="badge">Justificativa</span>
@@ -727,7 +760,7 @@
               <header class="content-header">
                 <div>
                   <h2 id="tituloDocumento">Ficha clínica simplificada</h2>
-                  <span id="subTituloDocumento">Identificação do paciente, motivo da consulta e anamnese.</span>
+                  <span id="subTituloDocumento">Identificação do paciente, motivo da consulta, anamnese e planejamento.</span>
                 </div>
                 <div class="small">
                   Profissional: <span id="resumoProfissional"></span>
@@ -738,7 +771,8 @@
                 <!-- FORMULÁRIOS -->
                 <div id="formContainer">
                   <!-- FICHA -->
-                  <form id="formFicha" class="form-panel" onsubmit="event.preventDefault(); gerarDocumento();">
+                  <form id="formFicha" class="form-panel"
+                        onsubmit="event.preventDefault(); gerarDocumento();">
                     <h3>Dados da ficha clínica</h3>
 
                     <div class="field-group">
@@ -764,17 +798,32 @@
 
                     <div class="field-group">
                       <label for="fichaMotivo">Motivo da consulta</label>
-                      <textarea id="fichaMotivo" placeholder="Queixa principal, início, características, fatores de melhora/piora..."></textarea>
+                      <textarea id="fichaMotivo"
+                                placeholder="Queixa principal, início, características, fatores de melhora/piora..."></textarea>
                     </div>
 
                     <div class="field-group">
                       <label for="fichaAnamnese">Anamnese (história clínica)</label>
-                      <textarea id="fichaAnamnese" placeholder="Condições sistêmicas, medicações em uso, alergias, antecedentes pessoais e familiares, entre outros."></textarea>
+                      <textarea id="fichaAnamnese"
+                                placeholder="Condições sistêmicas, medicações em uso, alergias, antecedentes pessoais e familiares, entre outros."></textarea>
+                    </div>
+
+                    <div class="field-group">
+                      <label for="fichaPlanejamento">Planejamento do tratamento</label>
+                      <textarea id="fichaPlanejamento"
+                                placeholder="Descreva o plano de tratamento proposto, fases e prioridades."></textarea>
+                    </div>
+
+                    <div class="field-group">
+                      <label for="fichaProcedimentos">Procedimentos realizados hoje</label>
+                      <textarea id="fichaProcedimentos"
+                                placeholder="Relate os procedimentos executados nesta sessão."></textarea>
                     </div>
                   </form>
 
                   <!-- RECEITUÁRIO -->
-                  <form id="formReceita" class="form-panel hidden" onsubmit="event.preventDefault(); gerarDocumento();">
+                  <form id="formReceita" class="form-panel hidden"
+                        onsubmit="event.preventDefault(); gerarDocumento();">
                     <h3>Dados do receituário</h3>
 
                     <div class="field-group">
@@ -783,8 +832,26 @@
                     </div>
 
                     <div class="field-group">
+                      <label for="receitaModelo">Modelos de prescrição (opcional)</label>
+                      <select id="receitaModelo" onchange="aplicarModeloReceita()">
+                        <option value="">Selecione um modelo de medicamento...</option>
+                        <option value="paracetamol">Paracetamol</option>
+                        <option value="dipirona">Dipirona</option>
+                        <option value="diclofenaco">Diclofenaco de potássio</option>
+                        <option value="ibuprofeno">Ibuprofeno</option>
+                        <option value="amoxicilina">Amoxicilina</option>
+                        <option value="amoxicilinaClavulanato">Amoxicilina + Clavulanato</option>
+                        <option value="azitromicina">Azitromicina</option>
+                      </select>
+                      <p class="small">
+                        O texto da posologia será inserido automaticamente no corpo da prescrição, podendo ser editado.
+                      </p>
+                    </div>
+
+                    <div class="field-group">
                       <label for="receitaCorpo">Corpo da prescrição</label>
-                      <textarea id="receitaCorpo" placeholder="Ex.: Amoxicilina 500mg, tomar 1 cápsula a cada 8 horas por 7 dias..."></textarea>
+                      <textarea id="receitaCorpo"
+                                placeholder="Ex.: Amoxicilina 500mg, tomar 1 cápsula a cada 8 horas por 7 dias..."></textarea>
                     </div>
 
                     <div class="form-row-inline">
@@ -800,7 +867,8 @@
                   </form>
 
                   <!-- ORÇAMENTO -->
-                  <form id="formOrcamento" class="form-panel hidden" onsubmit="event.preventDefault(); gerarDocumento();">
+                  <form id="formOrcamento" class="form-panel hidden"
+                        onsubmit="event.preventDefault(); gerarDocumento();">
                     <h3>Dados do orçamento</h3>
 
                     <div class="field-group">
@@ -810,13 +878,17 @@
 
                     <div class="field-group">
                       <label for="orcamentoObservacoes">Observações gerais</label>
-                      <textarea id="orcamentoObservacoes" placeholder="Condições de pagamento, validade do orçamento, observações clínicas importantes..."></textarea>
+                      <textarea id="orcamentoObservacoes"
+                                placeholder="Condições de pagamento, validade do orçamento, observações clínicas importantes..."></textarea>
                     </div>
 
                     <div class="field-group">
                       <label>Procedimentos (descrição e valores)</label>
-                      <div class="small" style="margin-bottom:0.3rem;">Preencha até 5 itens, se necessário.</div>
+                      <div class="small" style="margin-bottom:0.3rem;">
+                        Preencha até 10 itens, se necessário.
+                      </div>
 
+                      <!-- 1 a 10 -->
                       <div class="form-row-inline">
                         <div class="field-group">
                           <input id="p1desc" type="text" placeholder="Procedimento 1" />
@@ -861,6 +933,51 @@
                           <input id="p5valor" type="number" step="0.01" placeholder="Valor 5" />
                         </div>
                       </div>
+
+                      <div class="form-row-inline">
+                        <div class="field-group">
+                          <input id="p6desc" type="text" placeholder="Procedimento 6" />
+                        </div>
+                        <div class="field-group">
+                          <input id="p6valor" type="number" step="0.01" placeholder="Valor 6" />
+                        </div>
+                      </div>
+
+                      <div class="form-row-inline">
+                        <div class="field-group">
+                          <input id="p7desc" type="text" placeholder="Procedimento 7" />
+                        </div>
+                        <div class="field-group">
+                          <input id="p7valor" type="number" step="0.01" placeholder="Valor 7" />
+                        </div>
+                      </div>
+
+                      <div class="form-row-inline">
+                        <div class="field-group">
+                          <input id="p8desc" type="text" placeholder="Procedimento 8" />
+                        </div>
+                        <div class="field-group">
+                          <input id="p8valor" type="number" step="0.01" placeholder="Valor 8" />
+                        </div>
+                      </div>
+
+                      <div class="form-row-inline">
+                        <div class="field-group">
+                          <input id="p9desc" type="text" placeholder="Procedimento 9" />
+                        </div>
+                        <div class="field-group">
+                          <input id="p9valor" type="number" step="0.01" placeholder="Valor 9" />
+                        </div>
+                      </div>
+
+                      <div class="form-row-inline">
+                        <div class="field-group">
+                          <input id="p10desc" type="text" placeholder="Procedimento 10" />
+                        </div>
+                          <div class="field-group">
+                          <input id="p10valor" type="number" step="0.01" placeholder="Valor 10" />
+                        </div>
+                      </div>
                     </div>
 
                     <div class="form-row-inline">
@@ -875,407 +992,50 @@
                     </div>
                   </form>
 
-                  <!-- ATESTADO -->
-                  <form id="formAtestado" class="form-panel hidden" onsubmit="event.preventDefault(); gerarDocumento();">
-                    <h3>Dados do atestado</h3>
+                  <!-- LAUDO -->
+                  <form id="formLaudo" class="form-panel hidden"
+                        onsubmit="event.preventDefault(); gerarDocumento();">
+                    <h3>Dados do laudo</h3>
 
                     <div class="field-group">
-                      <label for="atestadoPaciente">Nome do paciente</label>
-                      <input id="atestadoPaciente" type="text" required />
+                      <label for="laudoPaciente">Nome do paciente</label>
+                      <input id="laudoPaciente" type="text" required />
                     </div>
 
                     <div class="field-group">
-                      <label for="atestadoDias">Período de afastamento</label>
-                      <input id="atestadoDias" type="text" placeholder="Ex.: 3 (três) dias" />
+                      <label for="laudoTitulo">Título do laudo</label>
+                      <input id="laudoTitulo" type="text"
+                             placeholder="Ex.: Laudo clínico / Laudo radiográfico / Laudo de avaliação" />
                     </div>
 
                     <div class="field-group">
-                      <label for="atestadoMotivo">Motivo / justificativa clínica (texto sucinto)</label>
-                      <textarea id="atestadoMotivo" placeholder="Ex.: Por motivo de tratamento odontológico, com dor intensa, infecção, etc."></textarea>
+                      <label for="laudoDescricao">Descrição detalhada</label>
+                      <textarea id="laudoDescricao"
+                                placeholder="Descreva achados clínicos, exames complementares, histórico relevante, etc."></textarea>
+                    </div>
+
+                    <div class="field-group">
+                      <label for="laudoConclusao">Conclusão / Impressão diagnóstica</label>
+                      <textarea id="laudoConclusao"
+                                placeholder="Síntese conclusiva do caso, hipóteses diagnósticas, condutas sugeridas, encaminhamentos, etc."></textarea>
                     </div>
 
                     <div class="form-row-inline">
                       <div class="field-group">
-                        <label for="atestadoCidade">Cidade</label>
-                        <input id="atestadoCidade" type="text" />
+                        <label for="laudoCidade">Cidade</label>
+                        <input id="laudoCidade" type="text" />
                       </div>
                       <div class="field-group">
-                        <label for="atestadoData">Data</label>
-                        <input id="atestadoData" type="date" />
+                        <label for="laudoData">Data</label>
+                        <input id="laudoData" type="date" />
                       </div>
                     </div>
                   </form>
-                </div>
 
-                <!-- PREVIEW -->
-                <div class="preview-panel">
-                  <div class="preview-paper" id="previewPaper">
-                    <p class="small">Preencha os dados à esquerda e clique em <strong>Gerar documento</strong> para visualizar aqui.</p>
-                  </div>
-                </div>
-              </div>
+                  <!-- ATESTADO -->
+                  <form id="formAtestado" class="form-panel hidden"
+                        onsubmit="event.preventDefault(); gerarDocumento();">
+                    <h3>Dados do atestado</h3>
 
-              <div class="actions no-print">
-                <button class="button-ghost" type="button" onclick="limparDocumentoAtual()">
-                  Limpar formulário
-                </button>
-                <button class="button-primary" type="button" onclick="gerarDocumento()">
-                  Gerar documento
-                </button>
-                <button class="button-primary" type="button" onclick="window.print()">
-                  Imprimir / Salvar em PDF
-                </button>
-              </div>
-            </section>
-          </div>
-        </section>
-      </div>
-    </main>
-  </div>
-
-  <script>
-    let profissional = {
-      nome: "",
-      especialidade: "",
-      conselho: "",
-      numeroConselho: "",
-      endereco: "",
-      telefone: "",
-      email: ""
-    };
-
-    let abaAtual = "ficha";
-
-    function atualizarResumoProfissional() {
-      const resumoSpan = document.getElementById("resumoProfissional");
-      const topInfo = document.getElementById("topUserInfo");
-      const partes = [];
-
-      if (profissional.nome) partes.push(profissional.nome);
-      if (profissional.especialidade) partes.push(profissional.especialidade);
-      if (profissional.conselho || profissional.numeroConselho) {
-        const c = [profissional.conselho, profissional.numeroConselho].filter(Boolean).join(" ");
-        partes.push(c);
-      }
-
-      resumoSpan.textContent = partes.join(" • ") || "Profissional não identificado";
-      topInfo.textContent = profissional.nome
-        ? `Conectado como ${profissional.nome}.`
-        : "Acesse com seus dados profissionais para iniciar.";
-    }
-
-    function limparLogin() {
-      document.getElementById("loginForm").reset();
-    }
-
-    document.getElementById("loginForm").addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      profissional.nome = document.getElementById("profNome").value.trim();
-      profissional.especialidade = document.getElementById("profEspecialidade").value.trim();
-      profissional.conselho = document.getElementById("profConselho").value.trim();
-      profissional.numeroConselho = document.getElementById("profNumeroConselho").value.trim();
-      profissional.endereco = document.getElementById("profEndereco").value.trim();
-      profissional.telefone = document.getElementById("profTelefone").value.trim();
-      profissional.email = document.getElementById("profEmail").value.trim();
-
-      if (!profissional.nome) {
-        alert("Por favor, informe pelo menos o seu nome completo.");
-        return;
-      }
-
-      atualizarResumoProfissional();
-
-      document.getElementById("loginScreen").classList.add("hidden");
-      document.getElementById("appScreen").classList.remove("hidden");
-    });
-
-    function selecionarAba(aba) {
-      abaAtual = aba;
-
-      const botoes = document.querySelectorAll(".nav-button");
-      botoes.forEach((btn) => {
-        btn.classList.toggle("active", btn.getAttribute("data-tab") === aba);
-      });
-
-      document.getElementById("formFicha").classList.toggle("hidden", aba !== "ficha");
-      document.getElementById("formReceita").classList.toggle("hidden", aba !== "receita");
-      document.getElementById("formOrcamento").classList.toggle("hidden", aba !== "orcamento");
-      document.getElementById("formAtestado").classList.toggle("hidden", aba !== "atestado");
-
-      const titulo = document.getElementById("tituloDocumento");
-      const sub = document.getElementById("subTituloDocumento");
-
-      if (aba === "ficha") {
-        titulo.textContent = "Ficha clínica simplificada";
-        sub.textContent = "Identificação do paciente, motivo da consulta e anamnese.";
-      } else if (aba === "receita") {
-        titulo.textContent = "Receituário";
-        sub.textContent = "Prescrição medicamentosa com identificação do profissional.";
-      } else if (aba === "orcamento") {
-        titulo.textContent = "Orçamento de procedimentos";
-        sub.textContent = "Descrição dos procedimentos propostos e valores.";
-      } else if (aba === "atestado") {
-        titulo.textContent = "Atestado";
-        sub.textContent = "Justificativa formal de afastamento por motivo de saúde.";
-      }
-
-      limparDocumentoAtual(true);
-    }
-
-    function limparDocumentoAtual(apenasPreview) {
-      if (!apenasPreview) {
-        if (abaAtual === "ficha") {
-          document.getElementById("formFicha").reset();
-        } else if (abaAtual === "receita") {
-          document.getElementById("formReceita").reset();
-        } else if (abaAtual === "orcamento") {
-          document.getElementById("formOrcamento").reset();
-        } else if (abaAtual === "atestado") {
-          document.getElementById("formAtestado").reset();
-        }
-      }
-
-      const preview = document.getElementById("previewPaper");
-      preview.innerHTML = '<p class="small">Preencha os dados e clique em <strong>Gerar documento</strong> para visualizar aqui.</p>';
-    }
-
-    function formatarData(value) {
-      if (!value) return "";
-      try {
-        const d = new Date(value);
-        return d.toLocaleDateString("pt-BR");
-      } catch (e) {
-        return value;
-      }
-    }
-
-    function gerarCabecalho(tipoTitulo) {
-      const hoje = new Date();
-      const dataStr = hoje.toLocaleDateString("pt-BR");
-      const horaStr = hoje.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-
-      const linhasEndereco = [];
-      if (profissional.endereco) linhasEndereco.push(profissional.endereco);
-      if (profissional.telefone) linhasEndereco.push("Tel./WhatsApp: " + profissional.telefone);
-      if (profissional.email) linhasEndereco.push("E-mail: " + profissional.email);
-
-      const linhaConselho = [profissional.conselho, profissional.numeroConselho].filter(Boolean).join(" ");
-
-      return `
-        <header class="doc-header">
-          <div class="doc-header-left">
-            <h1>${tipoTitulo}</h1>
-            <p><strong>${profissional.nome || ""}</strong></p>
-            ${profissional.especialidade ? `<p>${profissional.especialidade}</p>` : ""}
-            ${linhaConselho ? `<p>${linhaConselho}</p>` : ""}
-            ${linhasEndereco.length ? `<p>${linhasEndereco.join(" | ")}</p>` : ""}
-          </div>
-          <div class="doc-header-right">
-            <div><strong>BTX-Tech • Baixo Tocantins</strong></div>
-            <div>Gerado em: ${dataStr} às ${horaStr}</div>
-          </div>
-        </header>
-      `;
-    }
-
-    function gerarDocumento() {
-      const preview = document.getElementById("previewPaper");
-
-      if (abaAtual === "ficha") {
-        const paciente = document.getElementById("fichaPaciente").value.trim();
-        if (!paciente) {
-          alert("Informe o nome do paciente.");
-          return;
-        }
-
-        const nasc = formatarData(document.getElementById("fichaNascimento").value);
-        const tel = document.getElementById("fichaTelefone").value.trim();
-        const end = document.getElementById("fichaEndereco").value.trim();
-        const motivo = document.getElementById("fichaMotivo").value.trim();
-        const anamnese = document.getElementById("fichaAnamnese").value.trim();
-
-        const hoje = new Date().toLocaleDateString("pt-BR");
-
-        preview.innerHTML = `
-          ${gerarCabecalho("Ficha clínica simplificada")}
-          <section>
-            <div class="doc-section-title">Identificação do paciente</div>
-            <p class="doc-line"><strong>Paciente:</strong> ${paciente}</p>
-            ${nasc ? `<p class="doc-line"><strong>Data de nascimento:</strong> ${nasc}</p>` : ""}
-            ${tel ? `<p class="doc-line"><strong>Telefone:</strong> ${tel}</p>` : ""}
-            ${end ? `<p class="doc-line"><strong>Endereço:</strong> ${end}</p>` : ""}
-
-            <div class="doc-section-title">Motivo da consulta</div>
-            <p class="doc-block">${motivo || "_______________________________________________"}</p>
-
-            <div class="doc-section-title">Anamnese</div>
-            <p class="doc-block">${anamnese || "_______________________________________________"}</p>
-
-            <p class="doc-line" style="margin-top:1rem;"><strong>Data do atendimento:</strong> ${hoje}</p>
-
-            <div class="doc-sign">
-              <div>_______________________________________________</div>
-              <div>${profissional.nome || ""}</div>
-              ${profissional.conselho || profissional.numeroConselho ? `<div>${[profissional.conselho, profissional.numeroConselho].filter(Boolean).join(" ")}</div>` : ""}
-            </div>
-          </section>
-        `;
-      }
-
-      else if (abaAtual === "receita") {
-        const paciente = document.getElementById("receitaPaciente").value.trim();
-        if (!paciente) {
-          alert("Informe o nome do paciente.");
-          return;
-        }
-
-        const corpo = document.getElementById("receitaCorpo").value.trim();
-        const cidade = document.getElementById("receitaCidade").value.trim();
-        const data = formatarData(document.getElementById("receitaData").value) || formatarData(new Date());
-
-        preview.innerHTML = `
-          ${gerarCabecalho("Receituário")}
-          <section>
-            <p class="doc-line"><strong>Paciente:</strong> ${paciente}</p>
-
-            <div class="doc-section-title">Prescrição</div>
-            <p class="doc-block">${corpo || "_______________________________________________"}</p>
-
-            <p class="doc-line" style="margin-top:1rem;">
-              ${cidade ? cidade + ", " : ""}${data}.
-            </p>
-
-            <div class="doc-sign">
-              <div>_______________________________________________</div>
-              <div>${profissional.nome || ""}</div>
-              ${profissional.conselho || profissional.numeroConselho ? `<div>${[profissional.conselho, profissional.numeroConselho].filter(Boolean).join(" ")}</div>` : ""}
-            </div>
-          </section>
-        `;
-      }
-
-      else if (abaAtual === "orcamento") {
-        const paciente = document.getElementById("orcamentoPaciente").value.trim();
-        if (!paciente) {
-          alert("Informe o nome do paciente.");
-          return;
-        }
-
-        const obs = document.getElementById("orcamentoObservacoes").value.trim();
-        const cidade = document.getElementById("orcamentoCidade").value.trim();
-        const data = formatarData(document.getElementById("orcamentoData").value) || formatarData(new Date());
-
-        const itens = [];
-        for (let i = 1; i <= 5; i++) {
-          const desc = document.getElementById(`p${i}desc`).value.trim();
-          const valorStr = document.getElementById(`p${i}valor`).value.trim();
-          if (desc || valorStr) {
-            const valor = parseFloat(valorStr.replace(",", ".") || "0") || 0;
-            itens.push({ desc, valor });
-          }
-        }
-
-        let total = 0;
-        itens.forEach((i) => (total += i.valor));
-
-        const linhasTabela = itens
-          .map(
-            (i) => `
-            <tr>
-              <td>${i.desc || "-"}</td>
-              <td>R$ ${i.valor.toFixed(2).replace(".", ",")}</td>
-            </tr>
-          `
-          )
-          .join("");
-
-        preview.innerHTML = `
-          ${gerarCabecalho("Orçamento de procedimentos")}
-          <section>
-            <p class="doc-line"><strong>Paciente:</strong> ${paciente}</p>
-
-            <div class="doc-section-title">Procedimentos propostos</div>
-            ${
-              itens.length
-                ? `<table class="doc-table">
-                    <thead>
-                      <tr>
-                        <th>Procedimento</th>
-                        <th>Valor</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      ${linhasTabela}
-                    </tbody>
-                    <tfoot>
-                      <tr>
-                        <td>Total</td>
-                        <td>R$ ${total.toFixed(2).replace(".", ",")}</td>
-                      </tr>
-                    </tfoot>
-                  </table>`
-                : `<p class="doc-block">Nenhum procedimento informado.</p>`
-            }
-
-            ${
-              obs
-                ? `<div class="doc-section-title">Observações</div>
-                   <p class="doc-block">${obs}</p>`
-                : ""
-            }
-
-            <p class="doc-line" style="margin-top:1rem;">
-              ${cidade ? cidade + ", " : ""}${data}.
-            </p>
-
-            <div class="doc-sign">
-              <div>_______________________________________________</div>
-              <div>${profissional.nome || ""}</div>
-              ${profissional.conselho || profissional.numeroConselho ? `<div>${[profissional.conselho, profissional.numeroConselho].filter(Boolean).join(" ")}</div>` : ""}
-            </div>
-          </section>
-        `;
-      }
-
-      else if (abaAtual === "atestado") {
-        const paciente = document.getElementById("atestadoPaciente").value.trim();
-        if (!paciente) {
-          alert("Informe o nome do paciente.");
-          return;
-        }
-
-        const dias = document.getElementById("atestadoDias").value.trim();
-        const motivo = document.getElementById("atestadoMotivo").value.trim();
-        const cidade = document.getElementById("atestadoCidade").value.trim();
-        const data = formatarData(document.getElementById("atestadoData").value) || formatarData(new Date());
-
-        const textoBase = `
-          Atesto, para os devidos fins, que o(a) paciente ${paciente}${
-          motivo ? ", " + motivo : ""
-        } necessita de afastamento de suas atividades habituais
-          pelo período de ${dias || "____"} , a contar desta data.
-        `.trim();
-
-        preview.innerHTML = `
-          ${gerarCabecalho("Atestado")}
-          <section>
-            <div class="doc-section-title">Texto do atestado</div>
-            <p class="doc-block">${textoBase}</p>
-
-            <p class="doc-line" style="margin-top:1rem;">
-              ${cidade ? cidade + ", " : ""}${data}.
-            </p>
-
-            <div class="doc-sign">
-              <div>_______________________________________________</div>
-              <div>${profissional.nome || ""}</div>
-              ${profissional.conselho || profissional.numeroConselho ? `<div>${[profissional.conselho, profissional.numeroConselho].filter(Boolean).join(" ")}</div>` : ""}
-            </div>
-          </section>
-        `;
-      }
-    }
-  </script>
-</body>
-</html>
+                    <div class="field-group">
+                      <label for="atestadoPaciente
