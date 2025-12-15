@@ -1393,7 +1393,11 @@
       <div>${profLinhas.map(escapeHtml).join("<br/>")}</div>
     `;
   }
-
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("service-worker.js");
+}
+</script>
   // boot
   document.addEventListener("DOMContentLoaded", () => {
     const prof = carregarProfissional();
