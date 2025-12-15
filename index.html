@@ -1038,4 +1038,368 @@
                     <h3>Dados do atestado</h3>
 
                     <div class="field-group">
-                      <label for="atestadoPaciente
+                      <label for="atestadoPaciente">
+                        <!-- ATESTADO -->
+<form id="formAtestado" class="form-panel hidden"
+      onsubmit="event.preventDefault(); gerarDocumento();">
+  <h3>Dados do atestado</h3>
+
+  <div class="field-group">
+    <label for="atestadoPaciente">Nome do paciente</label>
+    <input id="atestadoPaciente" type="text" required />
+  </div>
+
+  <div class="field-group">
+    <label for="atestadoDias">Dias de afastamento (opcional)</label>
+    <input id="atestadoDias" type="number" min="0" step="1" placeholder="Ex.: 2" />
+  </div>
+
+  <div class="field-group">
+    <label for="atestadoDescricao">Descrição / Justificativa</label>
+    <textarea id="atestadoDescricao" placeholder="Ex.: Necessita afastamento de suas atividades por motivo de saúde."></textarea>
+  </div>
+
+  <div class="form-row-inline">
+    <div class="field-group">
+      <label for="atestadoCidade">Cidade</label>
+      <input id="atestadoCidade" type="text" />
+    </div>
+    <div class="field-group">
+      <label for="atestadoData">Data</label>
+      <input id="atestadoData" type="date" />
+    </div>
+  </div>
+</form>
+</div>
+
+<!-- PREVIEW -->
+<div class="preview-panel">
+  <div class="actions no-print">
+    <button type="button" class="button-ghost" onclick="limparFormularioAtual()">Limpar formulário</button>
+    <button type="button" class="button-primary" onclick="imprimirPDF()">Imprimir / PDF</button>
+  </div>
+
+  <div class="preview-paper" id="previewPaper">
+    <div class="doc-header">
+      <div class="doc-header-left">
+        <h1 id="previewTitulo">Pré-visualização</h1>
+        <p id="previewSub">Preencha um formulário e clique em Imprimir / PDF.</p>
+      </div>
+      <div class="doc-header-right" id="previewMeta"></div>
+    </div>
+
+    <div id="previewConteudo"></div>
+
+    <div class="doc-sign" id="previewAssinatura"></div>
+  </div>
+</div>
+
+</div> <!-- .forms-and-preview -->
+</section> <!-- .content -->
+</div> <!-- .app-layout -->
+</section> <!-- #appScreen -->
+</div> <!-- .shell -->
+</main>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+
+  const TABS = {
+    ficha: {
+      title: "Ficha clínica simplificada",
+      sub: "Identificação do paciente, motivo da consulta, anamnese e planejamento.",
+      formId: "formFicha"
+    },
+    receita: {
+      title: "Receituário",
+      sub: "Prescrição com posologia + data/cidade.",
+      formId: "formReceita"
+    },
+    orcamento: {
+      title: "Orçamento",
+      sub: "Procedimentos e valores, pronto para impressão.",
+      formId: "formOrcamento"
+    },
+    laudo: {
+      title: "Laudo",
+      sub: "Relatório estruturado com conclusão.",
+      formId: "formLaudo"
+    },
+    atestado: {
+      title: "Atestado",
+      sub: "Justificativa e dias de afastamento (se necessário).",
+      formId: "formAtestado"
+    }
+  };
+
+  let abaAtual = "ficha";
+  let profissional = null;
+
+  function hojeISO() {
+    const d = new Date();
+    const yyyy = d.getFullYear();
+    const mm = String(d.getMonth() + 1).padStart(2, "0");
+    const dd = String(d.getDate()).padStart(2, "0");
+    return `${yyyy}-${mm}-${dd}`;
+  }
+
+  function carregarProfissional() {
+    const raw = localStorage.getItem("btx_profissional");
+    if (!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  }
+
+  function salvarProfissional(data) {
+    localStorage.setItem("btx_profissional", JSON.stringify(data));
+  }
+
+  function setDatasPadrao() {
+    const ids = ["receitaData","orcamentoData","laudoData","atestadoData"];
+    ids.forEach((id) => {
+      const el = $(id);
+      if (el && !el.value) el.value = hojeISO();
+    });
+  }
+
+  function entrarNoSistema(prof) {
+    profissional = prof;
+    $("loginScreen").classList.add("hidden");
+    $("appScreen").classList.remove("hidden");
+
+    $("topUserInfo").textContent = `Logado: ${prof.nome}${prof.conselho ? " • " + prof.conselho : ""}${prof.registro ? " " + prof.registro : ""}`;
+    $("resumoProfissional").textContent = `${prof.nome}${prof.especialidade ? " — " + prof.especialidade : ""}`;
+
+    setDatasPadrao();
+    selecionarAba(abaAtual);
+  }
+
+  function limparLogin() {
+    ["profNome","profEspecialidade","profConselho","profNumeroConselho","profEndereco","profTelefone","profEmail"]
+      .forEach(id => { if ($(id)) $(id).value = ""; });
+    localStorage.removeItem("btx_profissional");
+  }
+
+  $("loginForm")?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const prof = {
+      nome: $("profNome").value.trim(),
+      especialidade: $("profEspecialidade").value.trim(),
+      conselho: $("profConselho").value.trim(),
+      registro: $("profNumeroConselho").value.trim(),
+      endereco: $("profEndereco").value.trim(),
+      telefone: $("profTelefone").value.trim(),
+      email: $("profEmail").value.trim()
+    };
+    if (!prof.nome) return;
+
+    salvarProfissional(prof);
+    entrarNoSistema(prof);
+  });
+
+  function selecionarAba(tab) {
+    abaAtual = tab;
+
+    // botões
+    document.querySelectorAll(".nav-button").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === tab);
+    });
+
+    // títulos
+    $("tituloDocumento").textContent = TABS[tab].title;
+    $("subTituloDocumento").textContent = TABS[tab].sub;
+
+    // forms
+    Object.values(TABS).forEach(t => {
+      $(t.formId).classList.add("hidden");
+    });
+    $(TABS[tab].formId).classList.remove("hidden");
+
+    gerarDocumento(); // atualiza preview sempre
+  }
+
+  function aplicarModeloReceita() {
+    const v = $("receitaModelo").value;
+    const modelos = {
+      paracetamol: "Paracetamol 750mg\nTomar 01 comprimido a cada 8 horas, se dor ou febre, por até 3 dias.\n(Orientar dose máxima diária e evitar associações duplicadas.)",
+      dipirona: "Dipirona 500mg\nTomar 01 comprimido a cada 6–8 horas, se dor ou febre, por até 3 dias.",
+      diclofenaco: "Diclofenaco de potássio 50mg\nTomar 01 comprimido a cada 8–12 horas, após alimentação, por 3 dias.",
+      ibuprofeno: "Ibuprofeno 400mg\nTomar 01 comprimido a cada 8 horas, após alimentação, por 3 dias.",
+      amoxicilina: "Amoxicilina 500mg\nTomar 01 cápsula a cada 8 horas por 7 dias.",
+      amoxicilinaClavulanato: "Amoxicilina 875mg + Clavulanato 125mg\nTomar 01 comprimido a cada 12 horas por 7 dias.",
+      azitromicina: "Azitromicina 500mg\nTomar 01 comprimido ao dia por 3 dias."
+    };
+    if (!v) return;
+    const atual = $("receitaCorpo").value.trim();
+    $("receitaCorpo").value = atual ? (atual + "\n\n" + modelos[v]) : modelos[v];
+  }
+
+  function limparFormularioAtual() {
+    const formId = TABS[abaAtual].formId;
+    const form = $(formId);
+    if (!form) return;
+    form.querySelectorAll("input, textarea, select").forEach(el => {
+      if (el.tagName.toLowerCase() === "select") el.value = "";
+      else el.value = "";
+    });
+    setDatasPadrao();
+    gerarDocumento();
+  }
+
+  function imprimirPDF() {
+    gerarDocumento();
+    window.print();
+  }
+
+  function linha(label, value) {
+    if (!value) return "";
+    return `<p class="doc-line"><strong>${label}:</strong> ${escapeHtml(value)}</p>`;
+  }
+
+  function bloco(title, value) {
+    if (!value) return "";
+    return `<div>
+      <div class="doc-section-title">${escapeHtml(title)}</div>
+      <div class="doc-block">${escapeHtml(value)}</div>
+    </div>`;
+  }
+
+  function escapeHtml(str) {
+    return String(str ?? "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function gerarDocumento() {
+    // se não estiver logado, só não quebra
+    if (!profissional) {
+      $("previewTitulo").textContent = "Pré-visualização";
+      $("previewSub").textContent = "Faça login para gerar documentos.";
+      $("previewConteudo").innerHTML = "";
+      $("previewMeta").textContent = "";
+      $("previewAssinatura").innerHTML = "";
+      return;
+    }
+
+    const now = new Date();
+    const meta = `${now.toLocaleDateString("pt-BR")} • ${now.toLocaleTimeString("pt-BR").slice(0,5)}`;
+
+    $("previewMeta").textContent = meta;
+
+    // header do doc (lado esquerdo)
+    $("previewTitulo").textContent = TABS[abaAtual].title;
+    $("previewSub").textContent = TABS[abaAtual].sub;
+
+    let html = "";
+    let paciente = "";
+
+    if (abaAtual === "ficha") {
+      paciente = $("fichaPaciente").value.trim();
+      html += linha("Paciente", paciente);
+      html += linha("Nascimento", $("fichaNascimento").value);
+      html += linha("Telefone", $("fichaTelefone").value.trim());
+      html += linha("Endereço", $("fichaEndereco").value.trim());
+      html += bloco("Motivo da consulta", $("fichaMotivo").value.trim());
+      html += bloco("Anamnese", $("fichaAnamnese").value.trim());
+      html += bloco("Planejamento do tratamento", $("fichaPlanejamento").value.trim());
+      html += bloco("Procedimentos realizados hoje", $("fichaProcedimentos").value.trim());
+    }
+
+    if (abaAtual === "receita") {
+      paciente = $("receitaPaciente").value.trim();
+      const cidade = $("receitaCidade").value.trim();
+      const data = $("receitaData").value || hojeISO();
+      html += linha("Paciente", paciente);
+      html += `<div class="doc-section-title">Prescrição</div>`;
+      html += `<div class="doc-block">${escapeHtml($("receitaCorpo").value.trim())}</div>`;
+      html += `<p class="doc-line"><strong>${escapeHtml(cidade || "Cidade")}</strong>, ${escapeHtml(data)}</p>`;
+    }
+
+    if (abaAtual === "orcamento") {
+      paciente = $("orcamentoPaciente").value.trim();
+      const cidade = $("orcamentoCidade").value.trim();
+      const data = $("orcamentoData").value || hojeISO();
+
+      const itens = [];
+      for (let i=1;i<=10;i++){
+        const d = $(`p${i}desc`)?.value?.trim();
+        const v = $(`p${i}valor`)?.value;
+        if (d || v) itens.push({ desc: d || "", valor: v ? Number(v) : 0 });
+      }
+
+      html += linha("Paciente", paciente);
+
+      if (itens.length) {
+        const total = itens.reduce((acc,it)=>acc+(it.valor||0),0);
+        html += `<table class="doc-table">
+          <thead><tr><th>Procedimento</th><th>Valor (R$)</th></tr></thead>
+          <tbody>
+            ${itens.map(it => `<tr><td>${escapeHtml(it.desc)}</td><td>${(it.valor||0).toFixed(2)}</td></tr>`).join("")}
+          </tbody>
+          <tfoot><tr><td>Total</td><td>${total.toFixed(2)}</td></tr></tfoot>
+        </table>`;
+      } else {
+        html += `<p class="doc-line">Nenhum procedimento informado.</p>`;
+      }
+
+      html += bloco("Observações", $("orcamentoObservacoes").value.trim());
+      html += `<p class="doc-line"><strong>${escapeHtml(cidade || "Cidade")}</strong>, ${escapeHtml(data)}</p>`;
+    }
+
+    if (abaAtual === "laudo") {
+      paciente = $("laudoPaciente").value.trim();
+      const cidade = $("laudoCidade").value.trim();
+      const data = $("laudoData").value || hojeISO();
+
+      html += linha("Paciente", paciente);
+      html += linha("Título", $("laudoTitulo").value.trim());
+      html += bloco("Descrição detalhada", $("laudoDescricao").value.trim());
+      html += bloco("Conclusão / Impressão diagnóstica", $("laudoConclusao").value.trim());
+      html += `<p class="doc-line"><strong>${escapeHtml(cidade || "Cidade")}</strong>, ${escapeHtml(data)}</p>`;
+    }
+
+    if (abaAtual === "atestado") {
+      paciente = $("atestadoPaciente").value.trim();
+      const cidade = $("atestadoCidade").value.trim();
+      const data = $("atestadoData").value || hojeISO();
+      const dias = $("atestadoDias").value ? Number($("atestadoDias").value) : null;
+
+      html += linha("Paciente", paciente);
+      if (dias !== null && !Number.isNaN(dias) && dias > 0) {
+        html += `<p class="doc-line"><strong>Afastamento:</strong> ${dias} dia(s).</p>`;
+      }
+      html += bloco("Declaração", $("atestadoDescricao").value.trim());
+      html += `<p class="doc-line"><strong>${escapeHtml(cidade || "Cidade")}</strong>, ${escapeHtml(data)}</p>`;
+    }
+
+    $("previewConteudo").innerHTML = html;
+
+    // assinatura + dados profissional
+    const profLinhas = [
+      profissional.nome,
+      profissional.especialidade,
+      (profissional.conselho || profissional.registro) ? `${profissional.conselho || ""} ${profissional.registro || ""}`.trim() : "",
+      profissional.endereco,
+      profissional.telefone,
+      profissional.email
+    ].filter(Boolean);
+
+    $("previewAssinatura").innerHTML = `
+      <div style="margin-top: 1.8rem;">__________________________________________</div>
+      <div>${profLinhas.map(escapeHtml).join("<br/>")}</div>
+    `;
+  }
+
+  // boot
+  document.addEventListener("DOMContentLoaded", () => {
+    const prof = carregarProfissional();
+    if (prof && prof.nome) entrarNoSistema(prof);
+    setDatasPadrao();
+  });
+</script>
+
+</body>
+</html>
+
