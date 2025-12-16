@@ -1387,24 +1387,27 @@
       profissional.telefone,
       profissional.email
     ].filter(Boolean);
-
-    $("previewAssinatura").innerHTML = `
-      <div style="margin-top: 1.8rem;">__________________________________________</div>
-      <div>${profLinhas.map(escapeHtml).join("<br/>")}</div>
-    `;
-  }
 <script>
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("service-worker.js");
-}
-  // boot
+  // Registra o Service Worker (PWA)
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./service-worker.js");
+  }
+
+  // Boot do sistema
   document.addEventListener("DOMContentLoaded", () => {
-  entrarNoSistema({ nome: "Teste BTX" }); // entra direto forçado
-  setDatasPadrao();
-});
+    try {
+      const prof = carregarProfissional();
 
+      if (prof && prof.nome) {
+        entrarNoSistema(prof);
+      }
+
+      setDatasPadrao();
+    } catch (e) {
+      console.error("Erro no boot:", e);
+    }
+  });
 </script>
-
 </body>
 </html>
 
