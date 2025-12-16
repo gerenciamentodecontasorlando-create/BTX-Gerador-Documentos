@@ -1399,10 +1399,10 @@ if ("serviceWorker" in navigator) {
 }
   // boot
   document.addEventListener("DOMContentLoaded", () => {
-    const prof = carregarProfissional();
-    //if (prof && prof.nome) entrarNoSistema(prof);
-    setDatasPadrao();
-  });
+  entrarNoSistema({ nome: "Teste BTX" }); // entra direto forçado
+  setDatasPadrao();
+});
+
 </script>
 
 </body>
