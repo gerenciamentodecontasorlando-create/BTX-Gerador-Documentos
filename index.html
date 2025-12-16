@@ -1403,8 +1403,10 @@ $("previewAssinatura").innerHTML =
 
   // Boot do sistema
   document.addEventListener("DOMContentLoaded", () => {
-    try {
-      const prof = carregarProfissional();
+  const prof = carregarProfissional() || { nome: "BTX" };
+  entrarNoSistema(prof);      // ✅ entra direto
+  setDatasPadrao();
+});
 
       if (prof && prof.nome) {
         entrarNoSistema(prof);
