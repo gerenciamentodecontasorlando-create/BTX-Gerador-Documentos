@@ -2,119 +2,117 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>BTX-Tech | Gerador de Documentos Clínicos</title>
+  <title>BTX-Tecnologia | Gerador de Documentos Clínicos</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="manifest" href="manifest.webmanifest">
-<meta name="theme-color" content="#020617">
   <style>
-    :root {
-      --bg: #020617;          /* preto azulado */
+    :raiz {
+      --bg: #020617; /* preto azulado */
       --bg-card: #020617;
-      --azul-royal: #2563eb;  /* azul royal */
+      --azul-royal: #2563eb; /* azul royal */
       --azul-escuro: #0f172a;
       --texto: #e5e7eb;
       --texto-suave: #9ca3af;
       --borda: #1f2937;
       --verde: #22c55e;
-      --danger: #f97373;
+      --perigo: #f97373;
     }
 
     * {
-      box-sizing: border-box;
+      box-sized: caixa com borda;
     }
 
-    body {
-      margin: 0;
-      padding: 0;
+    corpo {
+      margem: 0;
+      preenchimento: 0;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: radial-gradient(circle at top, #0b1120 0, #020617 45%, #000 100%);
-      color: var(--texto);
+      fundo: gradiente radial (círculo no topo, #0b1120 0, #020617 45%, #000 100%);
+      cor: var(--texto);
     }
 
     .app {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      altura mínima: 100vh;
+      Exibir: flexível;
+      flex-direction: coluna;
     }
 
     .topbar {
-      background: linear-gradient(90deg, #020617, #111827, #020617);
-      border-bottom: 1px solid var(--borda);
-      padding: 0.75rem 1.25rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      fundo: gradiente-linear(90 graus, #020617, #111827, #020617);
+      borda inferior: 1px var sólido (--borda);
+      preenchimento: 0,75rem 1,25rem;
+      Exibir: flexível;
+      alinhamento-itens: centro;
+      justify-content: espaço-entre;
+      posição: pegajosa;
+      topo: 0;
+      Índice z: 10;
     }
 
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+    .marca {
+      Exibir: flexível;
+      alinhamento-itens: centro;
+      intervalo: 0,75rem;
     }
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 999px;
-      border: 2px solid var(--azul-royal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      color: var(--azul-royal);
+    .logotipo da marca {
+      largura: 40px;
+      altura: 40px;
+      raio-da-borda: 999px;
+      borda: 2px var sólido (--azul-royal);
+      Exibir: flexível;
+      alinhamento-itens: centro;
+      justificar-conteúdo: centralizado;
+      peso da fonte: 700;
+      tamanho da fonte: 1,2rem;
+      cor: var(--azul-real);
       box-shadow: 0 0 12px rgba(37, 99, 235, 0.7);
     }
 
     .brand-text-title {
-      font-size: 1rem;
-      font-weight: 600;
+      tamanho da fonte: 1rem;
+      peso da fonte: 600;
     }
 
     .brand-text-sub {
-      font-size: 0.8rem;
-      color: var(--texto-suave);
+      tamanho da fonte: 0,8rem;
+      cor: var(--texto-suave);
     }
 
-    .user-info-top {
-      font-size: 0.8rem;
-      text-align: right;
-      color: var(--texto-suave);
+    .user-info-topo {
+      tamanho da fonte: 0,8rem;
+      alinhamento de texto: à direita;
+      cor: var(--texto-suave);
     }
 
-    main {
+    principal {
       flex: 1;
-      display: flex;
-      justify-content: center;
-      padding: 1.5rem 1rem 2rem;
+      Exibir: flexível;
+      justificar-conteúdo: centralizado;
+      preenchimento: 1,5rem 1rem 2rem;
     }
 
-    .shell {
-      width: 100%;
-      max-width: 1200px;
+    .concha {
+      largura: 100%;
+      largura máxima: 1200px;
     }
 
-    .screen {
-      border-radius: 1rem;
-      border: 1px solid var(--borda);
-      background: radial-gradient(circle at top, #111827 0, #020617 50%, #000 100%);
-      padding: 1.5rem;
+    .tela {
+      raio-da-borda: 1rem;
+      borda: 1px var sólido (--borda);
+      fundo: gradiente radial (círculo no topo, #111827 0, #020617 50%, #000 100%);
+      preenchimento: 1,5rem;
       box-shadow: 0 18px 60px rgba(0, 0, 0, 0.7);
     }
 
-    .hidden {
-      display: none !important;
+    .escondido {
+      exibir: nenhum !importante;
     }
 
-    /* LOGIN + BIO */
+    /* LOGIN + BIOGRAFIA */
 
     .login-layout {
-      display: grid;
+      Exibição: grade;
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
-      gap: 2rem;
+      intervalo: 2rem;
     }
 
     @media (max-width: 900px) {
@@ -124,199 +122,199 @@
     }
 
     .bio-card {
-      border-radius: 1rem;
-      border: 1px solid var(--borda);
-      background: linear-gradient(135deg, #020617, #020617, #111827);
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      position: relative;
-      overflow: hidden;
+      raio-da-borda: 1rem;
+      borda: 1px var sólido (--borda);
+      fundo: gradiente-linear(135deg, #020617, #020617, #111827);
+      preenchimento: 1,5rem;
+      Exibir: flexível;
+      flex-direction: coluna;
+      intervalo: 1rem;
+      posição: relativa;
+      overflow: oculto;
     }
 
     .bio-card::before {
-      content: "";
-      position: absolute;
-      inset: -40%;
-      background:
-        radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 60%),
-        radial-gradient(circle at bottom right, rgba(34, 197, 94, 0.16), transparent 55%);
-      opacity: 0.9;
-      pointer-events: none;
+      contente: "";
+      posição: absoluta;
+      detalhe: -40%;
+      fundo:
+        gradiente-radial(círculo no canto superior esquerdo, rgba(37, 99, 235, 0.18), transparente 60%),
+        gradiente-radial(círculo no canto inferior direito, rgba(34, 197, 94, 0.16), transparente 55%);
+      opacidade: 0,9;
+      eventos-ponteiro: nenhum;
     }
 
     .bio-header {
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      position: relative;
-      z-index: 1;
+      Exibir: flexível;
+      intervalo: 1rem;
+      alinhamento-itens: centro;
+      posição: relativa;
+      Índice z: 1;
     }
 
-    .bio-photo {
-      width: 88px;
-      height: 88px;
-      border-radius: 999px;
-      overflow: hidden;
-      border: 2px solid var(--azul-royal);
+    .bio-foto {
+      largura: 88px;
+      altura: 88px;
+      raio-da-borda: 999px;
+      overflow: oculto;
+      borda: 2px var sólido (--azul-royal);
       box-shadow: 0 0 18px rgba(37, 99, 235, 0.8);
       flex-shrink: 0;
-      background: #020617;
+      fundo: #020617;
     }
 
-    .bio-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .bio-foto img {
+      largura: 100%;
+      altura: 100%;
+      ajuste ao objeto: capa;
     }
 
-    .bio-title {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
+    .bio-título {
+      Exibir: flexível;
+      flex-direction: coluna;
+      intervalo: 0,25rem;
     }
 
     .bio-title h1 {
-      font-size: 1.2rem;
-      margin: 0;
+      tamanho da fonte: 1,2rem;
+      margem: 0;
     }
 
     .bio-title span {
-      font-size: 0.85rem;
-      color: var(--texto-suave);
+      tamanho da fonte: 0,85rem;
+      cor: var(--texto-suave);
     }
 
-    .bio-body {
-      position: relative;
-      z-index: 1;
-      font-size: 0.9rem;
-      color: var(--texto);
-      text-align: justify;
+    .bio-corpo {
+      posição: relativa;
+      Índice z: 1;
+      tamanho da fonte: 0,9rem;
+      cor: var(--texto);
+      alinhamento de texto: justificado;
     }
 
-    .bio-body p {
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
+    .bio-corpo p {
+      margem superior: 0,25rem;
+      margem-inferior: 0,25rem;
     }
 
-    .bio-highlight {
-      color: var(--azul-royal);
-      font-weight: 600;
+    .bio-destaque {
+      cor: var(--azul-real);
+      peso da fonte: 600;
     }
 
     .bio-footer {
-      position: relative;
-      z-index: 1;
-      font-size: 0.8rem;
-      color: var(--texto-suave);
-      text-align: justify;
+      posição: relativa;
+      Índice z: 1;
+      tamanho da fonte: 0,8rem;
+      cor: var(--texto-suave);
+      alinhamento de texto: justificado;
     }
 
     .login-card {
-      border-radius: 1rem;
-      border: 1px solid var(--borda);
-      background: #020617;
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
+      raio-da-borda: 1rem;
+      borda: 1px var sólido (--borda);
+      fundo: #020617;
+      preenchimento: 1,5rem;
+      Exibir: flexível;
+      flex-direction: coluna;
+      intervalo: 1rem;
     }
 
     .login-card h2 {
-      margin: 0;
-      font-size: 1rem;
+      margem: 0;
+      tamanho da fonte: 1rem;
     }
 
-    .field-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      margin-bottom: 0.75rem;
+    .grupo-de-campos {
+      Exibir: flexível;
+      flex-direction: coluna;
+      intervalo: 0,35rem;
+      margem-inferior: 0,75rem;
     }
 
-    label {
-      font-size: 0.8rem;
-      color: var(--texto-suave);
+    rótulo {
+      tamanho da fonte: 0,8rem;
+      cor: var(--texto-suave);
     }
 
-    input,
-    textarea,
-    select {
-      background: #020617;
-      border-radius: 0.6rem;
-      border: 1px solid var(--borda);
-      padding: 0.55rem 0.75rem;
-      color: var(--texto);
-      font-size: 0.85rem;
-      outline: none;
-      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    entrada,
+    área de texto,
+    selecionar {
+      fundo: #020617;
+      raio-da-borda: 0,6rem;
+      borda: 1px var sólido (--borda);
+      preenchimento: 0,55rem 0,75rem;
+      cor: var(--texto);
+      tamanho da fonte: 0,85rem;
+      Esboço: nenhum;
+      transição: suavização da cor da borda 0,15s, suavização da sombra da caixa 0,15s;
     }
 
-    input:focus,
+    entrada:foco,
     textarea:focus,
-    select:focus {
-      border-color: var(--azul-royal);
+    selecionar:focar {
+      cor da borda: var(--azul-royal);
       box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.6);
     }
 
-    textarea {
-      min-height: 90px;
-      resize: vertical;
+    área de texto {
+      altura mínima: 90px;
+      Redimensionar: vertical;
     }
 
-    .button-primary,
-    .button-ghost {
-      border-radius: 999px;
-      padding: 0.55rem 1.4rem;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid transparent;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.35rem;
-      transition: transform 0.1s ease, box-shadow 0.12s ease, background 0.12s ease, border-color 0.12s ease;
-      white-space: nowrap;
+    .button-primário,
+    .button-fantasma {
+      raio-da-borda: 999px;
+      preenchimento: 0,55rem 1,4rem;
+      tamanho da fonte: 0,85rem;
+      peso da fonte: 500;
+      borda: 1px sólida transparente;
+      cursor: ponteiro;
+      exibição: inline-flex;
+      alinhamento-itens: centro;
+      justificar-conteúdo: centralizado;
+      intervalo: 0,35rem;
+      transição: transformar 0,1s suavizar, sombra da caixa 0,12s suavizar, fundo 0,12s suavizar, cor da borda 0,12s suavizar;
+      espaço em branco: nowrap;
     }
 
     .button-primary {
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      color: #f9fafb;
+      fundo: gradiente-linear(135deg, #2563eb, #1d4ed8);
+      cor: #f9fafb;
       box-shadow: 0 10px 30px rgba(37, 99, 235, 0.6);
     }
 
     .button-primary:hover {
-      transform: translateY(-1px);
+      transformar: translateY(-1px);
       box-shadow: 0 14px 36px rgba(37, 99, 235, 0.8);
     }
 
-    .button-ghost {
-      background: transparent;
-      border-color: var(--borda);
-      color: var(--texto-suave);
+    .button-fantasma {
+      fundo: transparente;
+      cor-da-borda: var(--borda);
+      cor: var(--texto-suave);
     }
 
     .button-ghost:hover {
-      border-color: var(--azul-royal);
-      color: var(--texto);
+      cor da borda: var(--azul-royal);
+      cor: var(--texto);
     }
 
     .login-actions {
-      display: flex;
-      gap: 0.75rem;
+      Exibir: flexível;
+      intervalo: 0,75rem;
       justify-content: flex-end;
-      margin-top: 0.5rem;
-      flex-wrap: wrap;
+      margem superior: 0,5rem;
+      flex-wrap: envolver;
     }
 
-    /* APP PRINCIPAL */
+    /* PRINCIPAL DO APLICATIVO */
 
     .app-layout {
-      display: grid;
+      Exibição: grade;
       grid-template-columns: 220px minmax(0, 1fr);
-      gap: 1.5rem;
+      intervalo: 1,5rem;
     }
 
     @media (max-width: 900px) {
@@ -326,282 +324,282 @@
     }
 
     .sidebar {
-      border-radius: 1rem;
-      border: 1px solid var(--borda);
-      background: #020617;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+      raio-da-borda: 1rem;
+      borda: 1px var sólido (--borda);
+      fundo: #020617;
+      preenchimento: 1rem;
+      Exibir: flexível;
+      flex-direction: coluna;
+      intervalo: 0,75rem;
     }
 
     .sidebar-title {
-      font-size: 0.85rem;
-      color: var(--texto-suave);
-      margin-bottom: 0.25rem;
+      tamanho da fonte: 0,85rem;
+      cor: var(--texto-suave);
+      margem-inferior: 0,25rem;
     }
 
     .nav-button {
-      width: 100%;
-      text-align: left;
-      font-size: 0.85rem;
-      padding: 0.55rem 0.75rem;
-      border-radius: 0.75rem;
-      border: 1px solid transparent;
-      background: #020617;
-      color: var(--texto-suave);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 0.5rem;
-      transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease, transform 0.08s ease;
+      largura: 100%;
+      alinhamento de texto: esquerda;
+      tamanho da fonte: 0,85rem;
+      preenchimento: 0,55rem 0,75rem;
+      raio-da-borda: 0,75rem;
+      borda: 1px sólida transparente;
+      fundo: #020617;
+      cor: var(--texto-suave);
+      cursor: ponteiro;
+      Exibir: flexível;
+      alinhamento-itens: centro;
+      justify-content: espaço-entre;
+      intervalo: 0,5rem;
+      transição: fundo 0,12s de suavização, cor da borda 0,12s de suavização, cor 0,12s de suavização, transformação 0,08s de suavização;
     }
 
     .nav-button span.badge {
-      font-size: 0.7rem;
-      border-radius: 999px;
-      padding: 0.1rem 0.45rem;
-      border: 1px solid #1e293b;
+      tamanho da fonte: 0,7rem;
+      raio-da-borda: 999px;
+      preenchimento: 0,1rem 0,45rem;
+      borda: 1px sólida #1e293b;
     }
 
     .nav-button:hover {
-      background: #030712;
-      color: var(--texto);
-      border-color: #1f2937;
-      transform: translateY(-1px);
+      fundo: #030712;
+      cor: var(--texto);
+      cor da borda: #1f2937;
+      transformar: translateY(-1px);
     }
 
     .nav-button.active {
-      background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.4), #020617 70%);
-      color: #f9fafb;
-      border-color: var(--azul-royal);
+      fundo: gradiente radial (círculo no canto superior esquerdo, rgba(37, 99, 235, 0.4), #020617 70%);
+      cor: #f9fafb;
+      cor da borda: var(--azul-royal);
       box-shadow: 0 10px 28px rgba(37, 99, 235, 0.7);
     }
 
     .sidebar-footer {
-      margin-top: 1rem;
-      font-size: 0.75rem;
-      color: var(--texto-suave);
-      border-top: 1px solid #111827;
-      padding-top: 0.75rem;
+      margem-superior: 1rem;
+      tamanho da fonte: 0,75rem;
+      cor: var(--texto-suave);
+      borda superior: 1px sólida #111827;
+      acolchoamento superior: 0,75rem;
     }
 
-    .content {
-      border-radius: 1rem;
-      border: 1px solid var(--borda);
-      background: #020617;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .contente {
+      raio-da-borda: 1rem;
+      borda: 1px var sólido (--borda);
+      fundo: #020617;
+      preenchimento: 1rem;
+      Exibir: flexível;
+      flex-direction: coluna;
+      intervalo: 0,75rem;
     }
 
     .content-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 0.75rem;
-      flex-wrap: wrap;
+      Exibir: flexível;
+      justify-content: espaço-entre;
+      alinhamento-itens: centro;
+      intervalo: 0,75rem;
+      flex-wrap: envolver;
     }
 
     .content-header h2 {
-      font-size: 1rem;
-      margin: 0;
+      tamanho da fonte: 1rem;
+      margem: 0;
     }
 
     .content-header span {
-      font-size: 0.8rem;
-      color: var(--texto-suave);
+      tamanho da fonte: 0,8rem;
+      cor: var(--texto-suave);
     }
 
-    .forms-and-preview {
-      display: grid;
+    .formulários-e-visualização {
+      Exibição: grade;
       grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.1fr);
-      gap: 1rem;
+      intervalo: 1rem;
     }
 
     @media (max-width: 1000px) {
-      .forms-and-preview {
+      .formulários-e-visualização {
         grid-template-columns: minmax(0, 1fr);
       }
     }
 
     .form-panel {
-      border-radius: 0.85rem;
-      border: 1px solid var(--borda);
-      padding: 0.9rem;
-      background: #020617;
-      max-height: 480px;
-      overflow: auto;
+      raio-da-borda: 0,85rem;
+      borda: 1px var sólido (--borda);
+      preenchimento: 0,9rem;
+      fundo: #020617;
+      altura máxima: 480px;
+      estouro: automático;
     }
 
     .form-panel h3 {
-      font-size: 0.9rem;
-      margin-top: 0;
-      margin-bottom: 0.75rem;
-      color: var(--texto);
+      tamanho da fonte: 0,9rem;
+      margem superior: 0;
+      margem-inferior: 0,75rem;
+      cor: var(--texto);
     }
 
     .form-row-inline {
-      display: flex;
-      gap: 0.7rem;
-      flex-wrap: wrap;
+      Exibir: flexível;
+      intervalo: 0,7rem;
+      flex-wrap: envolver;
     }
 
     .form-row-inline .field-group {
       flex: 1;
-      min-width: 120px;
+      largura mínima: 120px;
     }
 
-    .actions {
-      display: flex;
+    .ações {
+      Exibir: flexível;
       justify-content: flex-end;
-      gap: 0.75rem;
-      margin-bottom: 0.5rem;
-      flex-wrap: wrap;
+      intervalo: 0,75rem;
+      margem-inferior: 0,5rem;
+      flex-wrap: envolver;
     }
 
     .preview-panel {
-      border-radius: 0.85rem;
-      border: 1px solid var(--borda);
-      padding: 0.9rem;
-      background: radial-gradient(circle at top, #020617 0, #020617 40%, #000 100%);
-      max-height: 480px;
-      overflow: auto;
+      raio-da-borda: 0,85rem;
+      borda: 1px var sólido (--borda);
+      preenchimento: 0,9rem;
+      fundo: gradiente radial (círculo no topo, #020617 0, #020617 40%, #000 100%);
+      altura máxima: 480px;
+      estouro: automático;
     }
 
     .preview-paper {
-      background: #ffffff;
-      color: #111827;
-      padding: 1.5rem;
-      border-radius: 0.25rem;
-      margin: 0 auto;
-      max-width: 800px;
+      fundo: #ffffff;
+      cor: #111827;
+      preenchimento: 1,5rem;
+      raio-da-borda: 0,25rem;
+      margem: 0 auto;
+      largura máxima: 800px;
       box-shadow: 0 0 0 1px #e5e7eb;
-      font-size: 0.9rem;
+      tamanho da fonte: 0,9rem;
     }
 
     .doc-header {
-      border-bottom: 1px solid #e5e7eb;
+      borda inferior: 1px sólida #e5e7eb;
       padding-bottom: 0.5rem;
-      margin-bottom: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      gap: 1rem;
-      align-items: flex-start;
+      margem-inferior: 0,75rem;
+      Exibir: flexível;
+      justify-content: espaço-entre;
+      intervalo: 1rem;
+      alinhamento-itens: início-flexível;
     }
 
     .doc-header-left h1 {
-      font-size: 1.05rem;
-      margin: 0 0 0.25rem;
+      tamanho da fonte: 1,05rem;
+      margem: 0 0 0,25rem;
     }
 
     .doc-header-left p {
-      margin: 0;
-      font-size: 0.78rem;
+      margem: 0;
+      tamanho da fonte: 0,78rem;
     }
 
     .doc-header-right {
-      text-align: right;
-      font-size: 0.78rem;
+      alinhamento de texto: à direita;
+      tamanho da fonte: 0,78rem;
     }
 
     .doc-section-title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      margin-top: 0.75rem;
-      margin-bottom: 0.25rem;
+      tamanho da fonte: 0,9rem;
+      peso da fonte: 600;
+      margem superior: 0,75rem;
+      margem-inferior: 0,25rem;
     }
 
     .doc-line {
-      margin: 0.15rem 0;
-      font-size: 0.85rem;
+      margem: 0,15rem 0;
+      tamanho da fonte: 0,85rem;
     }
 
     .doc-block {
-      margin-top: 0.35rem;
-      font-size: 0.85rem;
-      white-space: pre-wrap;
-      word-wrap: break-word;
+      margem superior: 0,35rem;
+      tamanho da fonte: 0,85rem;
+      espaço em branco: pré-quebra de linha;
+      quebra-de-palavra: quebra-de-palavra;
     }
 
     .doc-sign {
-      margin-top: 1.5rem;
-      text-align: center;
-      font-size: 0.85rem;
+      margem superior: 1,5rem;
+      alinhamento do texto: centralizado;
+      tamanho da fonte: 0,85rem;
     }
 
     .doc-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 0.5rem;
-      font-size: 0.85rem;
+      largura: 100%;
+      colapso de fronteira: colapso;
+      margem superior: 0,5rem;
+      tamanho da fonte: 0,85rem;
     }
 
     .doc-table th,
     .doc-table td {
-      border: 1px solid #e5e7eb;
-      padding: 0.3rem 0.4rem;
-      text-align: left;
+      borda: 1px sólida #e5e7eb;
+      preenchimento: 0,3rem 0,4rem;
+      alinhamento de texto: esquerda;
     }
 
     .doc-table tfoot td {
-      font-weight: 600;
+      peso da fonte: 600;
     }
 
-    .warn {
-      color: var(--danger);
-      font-size: 0.8rem;
-      margin-top: 0.25rem;
+    .avisar {
+      cor: var(--perigo);
+      tamanho da fonte: 0,8rem;
+      margem superior: 0,25rem;
     }
 
-    .small {
-      font-size: 0.78rem;
+    .pequeno {
+      tamanho da fonte: 0,78rem;
     }
 
     @media print {
       @page {
-        size: A4;
-        margin: 12mm;
+        Tamanho: A4;
+        margem: 12mm;
       }
 
-      html, body {
-        background: #ffffff;
-        height: auto;
+      html, corpo {
+        fundo: #ffffff;
+        altura: automática;
       }
 
       .topbar,
-      .sidebar,
-      .actions,
-      .no-print,
+      .barra lateral,
+      .ações,
+      .sem impressão,
       .form-panel {
-        display: none !important;
+        exibir: nenhum !importante;
       }
 
-      main {
-        padding: 0;
+      principal {
+        preenchimento: 0;
       }
 
-      .screen {
-        padding: 0;
-        border: none;
-        box-shadow: none;
-        border-radius: 0;
+      .tela {
+        preenchimento: 0;
+        fronteira: nenhuma;
+        sombra-da-caixa: nenhuma;
+        raio-da-borda: 0;
       }
 
       .preview-panel {
-        border: none;
-        padding: 0;
-        background: #ffffff;
-        max-height: none;
+        fronteira: nenhuma;
+        preenchimento: 0;
+        fundo: #ffffff;
+        altura-máxima: nenhuma;
       }
 
       .preview-paper {
-        box-shadow: none;
-        max-width: 100%;
-        padding: 1.2rem;
-        page-break-after: avoid;
+        sombra-da-caixa: nenhuma;
+        largura máxima: 100%;
+        preenchimento: 1,2rem;
+        quebra-de-página-após: evitar;
       }
     }
   </style>
@@ -621,7 +619,7 @@
       </div>
     </header>
 
-    <main>
+    <principal>
       <div class="shell">
         <!-- TELA DE LOGIN + BIO -->
         <section id="loginScreen" class="screen">
@@ -632,7 +630,7 @@
                   <img src="IMG_20251120_170412_259.webp" alt="Foto do profissional de saúde" />
                 </div>
                 <div class="bio-title">
-                  <h1>Dr. Orlando Abreu Gomes da Silva</h1>
+                  <h1>Dra. Orlando Abreu Gomes da Silva</h1>
                   <span>Cirurgião-Dentista & Fundador da BTX-Tech</span>
                 </div>
               </div>
@@ -640,7 +638,7 @@
                 <p>
                   Cirurgião-dentista formado em <span class="bio-highlight">2010</span>, atua como
                   <span class="bio-highlight">cirurgião bucomaxilofacial</span> e é pós-graduado em
-                  <span class="bio-highlight">Saúde Coletiva</span>. Atualmente é graduando em
+                  <span class="bio-highlight">Saúde Coletiva</span>. Atualmente estou me formando em
                   <span class="bio-highlight">Medicina</span> e em
                   <span class="bio-highlight">Análise de Sistemas</span>, integrando ciência clínica
                   e tecnologia em projetos de alto impacto social.
@@ -648,28 +646,28 @@
                 <p>
                   Fundador da <span class="bio-highlight">primeira startup de bioengenharia do Baixo
                   Tocantins</span>, a BTX-Tech nasce com a missão de levar soluções tecnológicas
-                  acessíveis para consultórios e serviços de saúde, reduzindo burocracias e
+                  fácil para consultórios e serviços de saúde, simplificando burocracias e
                   democratizando o acesso a ferramentas profissionais.
                 </p>
               </div>
               <div class="bio-footer">
                 Este gerador de documentos clínicos foi criado para simplificar o dia a dia do
                 profissional de saúde: ficha clínica clara, receituário organizado, orçamento
-                objetivo, laudo estruturado e atestado formal, prontos para impressão ou PDF.
+                objetivo, laudo estruturado e atestado formal, pronto para impressão ou PDF.
               </div>
             </article>
 
             <aside class="login-card">
               <h2>Dados do Profissional</h2>
               <p class="small" style="margin:0 0 0.75rem;">
-                Preencha seus dados uma única vez. Eles serão usados automaticamente em todos os documentos.
+                Preencha seus dados uma única vez. Eles serão usados ​​automaticamente em todos os documentos.
               </p>
 
               <form id="loginForm">
                 <div class="field-group">
                   <label for="profNome">Nome completo</label>
                   <input id="profNome" type="text"
-                         placeholder="Ex.: Dr. Orlando Abreu Gomes da Silva" required />
+                         placeholder="Ex.: Dr. Orlando Abreu Gomes da Silva" obrigatório />
                 </div>
 
                 <div class="field-group">
@@ -714,7 +712,7 @@
                     Entrar no sistema
                   </button>
                 </div>
-              </form>
+              </formulário>
             </aside>
           </div>
         </section>
@@ -731,7 +729,7 @@
               </button>
 
               <button class="nav-button" data-tab="receita" onclick="selecionarAba('receita')">
-                Receituário
+                Recibo
                 <span class="badge">Medicamentos</span>
               </button>
 
@@ -801,13 +799,13 @@
                     <div class="field-group">
                       <label for="fichaMotivo">Motivo da consulta</label>
                       <textarea id="fichaMotivo"
-                                placeholder="Queixa principal, início, características, fatores de melhora/piora..."></textarea>
+                                placeholder="Queixa principal, início, características, fatores de melhoria/piora..."></textarea>
                     </div>
 
                     <div class="field-group">
                       <label for="fichaAnamnese">Anamnese (história clínica)</label>
                       <textarea id="fichaAnamnese"
-                                placeholder="Condições sistêmicas, medicações em uso, alergias, antecedentes pessoais e familiares, entre outros."></textarea>
+                                placeholder="Condições sistêmicas, medicamentos em uso, alergias, antecedentes pessoais e familiares, entre outros."></textarea>
                     </div>
 
                     <div class="field-group">
@@ -819,9 +817,9 @@
                     <div class="field-group">
                       <label for="fichaProcedimentos">Procedimentos realizados hoje</label>
                       <textarea id="fichaProcedimentos"
-                                placeholder="Relate os procedimentos executados nesta sessão."></textarea>
+                                placeholder="Relacionar os procedimentos executados nesta sessão."></textarea>
                     </div>
-                  </form>
+                  </formulário>
 
                   <!-- RECEITUÁRIO -->
                   <form id="formReceita" class="form-panel hidden"
@@ -862,16 +860,16 @@
                         <input id="receitaCidade" type="text" placeholder="Cidade" />
                       </div>
                       <div class="field-group">
-                        <label for="receitaData">Data</label>
+                        <label for="receitaData">Dados</label>
                         <input id="receitaData" type="date" />
                       </div>
                     </div>
-                  </form>
+                  </formulário>
 
                   <!-- ORÇAMENTO -->
-                  <form id="formOrcamento" class="form-panel hidden"
+                  <form id="formOrçamento" class="form-panel hidden"
                         onsubmit="event.preventDefault(); gerarDocumento();">
-                    <h3>Dados do orçamento</h3>
+                    <h3>Dados do crossing</h3>
 
                     <div class="field-group">
                       <label for="orcamentoPaciente">Nome do paciente</label>
@@ -879,8 +877,8 @@
                     </div>
 
                     <div class="field-group">
-                      <label for="orcamentoObservacoes">Observações gerais</label>
-                      <textarea id="orcamentoObservacoes"
+                      <label for="orcamentoObservações">Observações gerais</label>
+                      <textarea id="orcamentoObservações"
                                 placeholder="Condições de pagamento, validade do orçamento, observações clínicas importantes..."></textarea>
                     </div>
 
@@ -988,11 +986,11 @@
                         <input id="orcamentoCidade" type="text" />
                       </div>
                       <div class="field-group">
-                        <label for="orcamentoData">Data</label>
+                        <label for="orcamentoData">Dados</label>
                         <input id="orcamentoData" type="date" />
                       </div>
                     </div>
-                  </form>
+                  </formulário>
 
                   <!-- LAUDO -->
                   <form id="formLaudo" class="form-panel hidden"
@@ -1028,11 +1026,11 @@
                         <input id="laudoCidade" type="text" />
                       </div>
                       <div class="field-group">
-                        <label for="laudoData">Data</label>
+                        <label for="laudoData">Dados</label>
                         <input id="laudoData" type="date" />
                       </div>
                     </div>
-                  </form>
+                  </formulário>
 
                   <!-- ATESTADO -->
                   <form id="formAtestado" class="form-panel hidden"
@@ -1067,14 +1065,14 @@
       <input id="atestadoCidade" type="text" />
     </div>
     <div class="field-group">
-      <label for="atestadoData">Data</label>
+      <label for="atestadoData">Dados</label>
       <input id="atestadoData" type="date" />
     </div>
   </div>
-</form>
+</formulário>
 </div>
 
-<!-- PREVIEW -->
+<!-- PRÉ-VISUALIZAÇÃO -->
 <div class="preview-panel">
   <div class="actions no-print">
     <button type="button" class="button-ghost" onclick="limparFormularioAtual()">Limpar formulário</button>
@@ -1107,55 +1105,55 @@
   const $ = (id) => document.getElementById(id);
 
   const TABS = {
-    ficha: {
-      title: "Ficha clínica simplificada",
+    : {
+      título: "Ficha clínica simplificada",
       sub: "Identificação do paciente, motivo da consulta, anamnese e planejamento.",
-      formId: "formFicha"
+      ID do formulário: "formFicha"
     },
-    receita: {
-      title: "Receituário",
+    Receita: {
+      título: "Recibo",
       sub: "Prescrição com posologia + data/cidade.",
-      formId: "formReceita"
+      ID do formulário: "formReceita"
     },
     orcamento: {
-      title: "Orçamento",
-      sub: "Procedimentos e valores, pronto para impressão.",
-      formId: "formOrcamento"
+      título: "Orçamento",
+      sub: "Procedimentos e valores, prontos para impressão.",
+      ID do formulário: "formOrcamento"
     },
     laudo: {
-      title: "Laudo",
+      título: "Laudo",
       sub: "Relatório estruturado com conclusão.",
-      formId: "formLaudo"
+      ID do formulário: "formLaudo"
     },
     atestado: {
-      title: "Atestado",
+      título: "Atestado",
       sub: "Justificativa e dias de afastamento (se necessário).",
-      formId: "formAtestado"
+      ID do formulário: "formAtestado"
     }
   };
 
   let abaAtual = "ficha";
-  let profissional = null;
+  seja profissional = nulo;
 
-  function hojeISO() {
+  função hojeISO() {
     const d = new Date();
     const yyyy = d.getFullYear();
     const mm = String(d.getMonth() + 1).padStart(2, "0");
     const dd = String(d.getDate()).padStart(2, "0");
-    return `${yyyy}-${mm}-${dd}`;
+    retornar `${yyyy}-${mm}-${dd}`;
   }
 
   function carregarProfissional() {
     const raw = localStorage.getItem("btx_profissional");
-    if (!raw) return null;
+    se (!raw) retornar nulo;
     try { return JSON.parse(raw); } catch { return null; }
   }
 
-  function salvarProfissional(data) {
-    localStorage.setItem("btx_profissional", JSON.stringify(data));
+  função salvarProfissional(dados) {
+    localStorage.setItem("btx_profissional", JSON.stringify(dados));
   }
 
-  function setDatasPadrao() {
+  função setDatasPadrao() {
     const ids = ["receitaData","orcamentoData","laudoData","atestadoData"];
     ids.forEach((id) => {
       const el = $(id);
@@ -1172,10 +1170,10 @@
     $("resumoProfissional").textContent = `${prof.nome}${prof.especialidade ? " — " + prof.especialidade : ""}`;
 
     setDatasPadrao();
-    selecionarAba(abaAtual);
+    certoAba(abaAtual);
   }
 
-  function limparLogin() {
+  função limparLogin() {
     ["profNome","profEspecialidade","profConselho","profNumeroConselho","profEndereco","profTelefone","profEmail"]
       .forEach(id => { if ($(id)) $(id).value = ""; });
     localStorage.removeItem("btx_profissional");
@@ -1192,31 +1190,31 @@
       telefone: $("profTelefone").value.trim(),
       email: $("profEmail").value.trim()
     };
-    if (!prof.nome) return;
+    se (!prof.nome) retornar;
 
     salvarProfissional(prof);
     entrarNoSistema(prof);
   });
 
-  function selecionarAba(tab) {
+  função ímAba(tab) {
     abaAtual = tab;
 
-    // botões
+    //
     document.querySelectorAll(".nav-button").forEach(btn => {
-      btn.classList.toggle("active", btn.dataset.tab === tab);
+      btn.classList.toggle("ativo", btn.dataset.tab === tab);
     });
 
     // títulos
     $("tituloDocumento").textContent = TABS[tab].title;
     $("subTituloDocumento").textContent = TABS[tab].sub;
 
-    // forms
+    // formulários
     Object.values(TABS).forEach(t => {
       $(t.formId).classList.add("hidden");
     });
     $(TABS[tab].formId).classList.remove("hidden");
 
-    gerarDocumento(); // atualiza preview sempre
+    gerarDocumento(); // atualiza a visualização sempre
   }
 
   function aplicarModeloReceita() {
@@ -1230,59 +1228,59 @@
       amoxicilinaClavulanato: "Amoxicilina 875mg + Clavulanato 125mg\nTomar 01 comprimido a cada 12 horas por 7 dias.",
       azitromicina: "Azitromicina 500mg\nTomar 01 comprimido ao dia por 3 dias."
     };
-    if (!v) return;
+    se (!v) retornar;
     const atual = $("receitaCorpo").value.trim();
-    $("receitaCorpo").value = atual ? (atual + "\n\n" + modelos[v]) : modelos[v];
+    $("receitaCorpo").valor = atual ? (atual + "\n\n" + modelos[v]) : modelos[v];
   }
 
-  function limparFormularioAtual() {
+  função limparFormularioAtual() {
     const formId = TABS[abaAtual].formId;
     const form = $(formId);
-    if (!form) return;
+    se (!formulário) retornar;
     form.querySelectorAll("input, textarea, select").forEach(el => {
       if (el.tagName.toLowerCase() === "select") el.value = "";
-      else el.value = "";
+      senão el.value = "";
     });
     setDatasPadrao();
     gerarDocumento();
   }
 
-  function imprimirPDF() {
+  função imprimirPDF() {
     gerarDocumento();
-    window.print();
+    janela.print();
   }
 
-  function linha(label, value) {
-    if (!value) return "";
-    return `<p class="doc-line"><strong>${label}:</strong> ${escapeHtml(value)}</p>`;
+  função linha(rótulo, valor) {
+    se (!valor) retorne "";
+    retornar `<p class="doc-line"><strong>${label}:</strong> ${escapeHtml(value)celp>`;
   }
 
-  function bloco(title, value) {
-    if (!value) return "";
-    return `<div>
+  função bloco(título, valor) {
+    se (!valor) retorne "";
+    retornar `<div>
       <div class="doc-section-title">${escapeHtml(title)}</div>
-      <div class="doc-block">${escapeHtml(value)}</div>
+      <div class="doc-block">${escapeHtml(value)</div>
     </div>`;
   }
 
-  function escapeHtml(str) {
-    return String(str ?? "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
+  função escapeHtml(str) {
+    retornar String(str ?? "")
+      .replaceAll("&","&")
+      .replaceAll("<","<")
+      .replaceAll(">",">")
+      .replaceAll('"',""")
+      .replaceAll("'","'");
   }
 
-  function gerarDocumento() {
+  função gerarDocumento() {
     // se não estiver logado, só não quebra
-    if (!profissional) {
+    se (!profissional) {
       $("previewTitulo").textContent = "Pré-visualização";
       $("previewSub").textContent = "Faça login para gerar documentos.";
       $("previewConteudo").innerHTML = "";
       $("previewMeta").textContent = "";
-      $("previewAssinatura").innerHTML = "";
-      return;
+      $("pré-visualizaçãoAssinatura").innerHTML = "";
+      retornar;
     }
 
     const now = new Date();
@@ -1290,14 +1288,14 @@
 
     $("previewMeta").textContent = meta;
 
-    // header do doc (lado esquerdo)
+    //cabeçalho do doc (lado esquerdo)
     $("previewTitulo").textContent = TABS[abaAtual].title;
     $("previewSub").textContent = TABS[abaAtual].sub;
 
     let html = "";
-    let paciente = "";
+    seja paciente = "";
 
-    if (abaAtual === "ficha") {
+    se (abaAtual === "ficha") {
       paciente = $("fichaPaciente").value.trim();
       html += linha("Paciente", paciente);
       html += linha("Nascimento", $("fichaNascimento").value);
@@ -1309,10 +1307,10 @@
       html += bloco("Procedimentos realizados hoje", $("fichaProcedimentos").value.trim());
     }
 
-    if (abaAtual === "receita") {
+    se (abaAtual === "receita") {
       paciente = $("receitaPaciente").value.trim();
       const cidade = $("receitaCidade").value.trim();
-      const data = $("receitaData").value || hojeISO();
+      const dados = $("receitaData").valor || hojeISO();
       html += linha("Paciente", paciente);
       html += `<div class="doc-section-title">Prescrição</div>`;
       html += `<div class="doc-block">${escapeHtml($("receitaCorpo").value.trim())}</div>`;
@@ -1325,15 +1323,15 @@
       const data = $("orcamentoData").value || hojeISO();
 
       const itens = [];
-      for (let i=1;i<=10;i++){
+      para (seja i=1;i<=10;i++){
         const d = $(`p${i}desc`)?.value?.trim();
-        const v = $(`p${i}valor`)?.value;
-        if (d || v) itens.push({ desc: d || "", valor: v ? Number(v) : 0 });
+        const v = $(`p${i}valor`)?.valor;
+        if (d || v) itens.push({ desc: d || "", valor: v ? Número(v) : 0 });
       }
 
       html += linha("Paciente", paciente);
 
-      if (itens.length) {
+      se (itens.comprimento) {
         const total = itens.reduce((acc,it)=>acc+(it.valor||0),0);
         html += `<table class="doc-table">
           <thead><tr><th>Procedimento</th><th>Valor (R$)</th></tr></thead>
@@ -1342,15 +1340,15 @@
           </tbody>
           <tfoot><tr><td>Total</td><td>${total.toFixed(2)}</td></tr></tfoot>
         </table>`;
-      } else {
+      } outro {
         html += `<p class="doc-line">Nenhum procedimento informado.</p>`;
       }
 
-      html += bloco("Observações", $("orcamentoObservacoes").value.trim());
+      html += bloco("Observações", $("orcamentoObservações").value.trim());
       html += `<p class="doc-line"><strong>${escapeHtml(cidade || "Cidade")}</strong>, ${escapeHtml(data)}</p>`;
     }
 
-    if (abaAtual === "laudo") {
+    se (abaAtual === "laudo") {
       paciente = $("laudoPaciente").value.trim();
       const cidade = $("laudoCidade").value.trim();
       const data = $("laudoData").value || hojeISO();
@@ -1358,15 +1356,15 @@
       html += linha("Paciente", paciente);
       html += linha("Título", $("laudoTitulo").value.trim());
       html += bloco("Descrição detalhada", $("laudoDescricao").value.trim());
-      html += bloco("Conclusão / Impressão diagnóstica", $("laudoConclusao").value.trim());
+      html += bloco("Conclusão / Impressão diagnóstica", $("laudoConclusão").value.trim());
       html += `<p class="doc-line"><strong>${escapeHtml(cidade || "Cidade")}</strong>, ${escapeHtml(data)}</p>`;
     }
 
     if (abaAtual === "atestado") {
       paciente = $("atestadoPaciente").value.trim();
       const cidade = $("atestadoCidade").value.trim();
-      const data = $("atestadoData").value || hojeISO();
-      const dias = $("atestadoDias").value ? Number($("atestadoDias").value) : null;
+      dados const = $("atestadoData").valor || hojeISO();
+      const dias = $("atestadoDias").valor ? Number($("atestadoDias").valor) : null;
 
       html += linha("Paciente", paciente);
       if (dias !== null && !Number.isNaN(dias) && dias > 0) {
@@ -1378,46 +1376,29 @@
 
     $("previewConteudo").innerHTML = html;
 
-    // assinatura + dados profissional
-  const profLinhas = [
-  profissional?.nome,
-  profissional?.especialidade,
-  (profissional?.conselho || profissional?.registro)
-    ? `${profissional?.conselho || ""} ${profissional?.registro || ""}`.trim()
-    : "",
-  profissional?.endereco,
-  profissional?.telefone,
-  profissional?.email
-].filter(Boolean);
+    // assinatura + dados profissionais
+    const profLinhas = [
+      profissional.nome,
+      profissional.especialidade,
+      (profissional.conselho || profissional.registro) ? `${profissional.conselho || ""} ${profissional.registro || ""}`.trim() : "",
+      profissional.endereco,
+      profissional.telefone,
+      profissional.email
+    ].filter(Boolean);
 
-$("previewAssinatura").innerHTML =
-  `<div style="margin-top: 1.8rem;">
-     <div>${profLinhas.map(escapeHtml).join("<br/>")}</div>
-   </div>`;
-
-<script>
-  // Registra o Service Worker (PWA)
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("./service-worker.js");
+    $("pré-visualizaçãoAssinatura").innerHTML = `
+      <div style="margin-top: 1.8rem;">__________________________________________</div>
+      <div>${profLinhas.map(escapeHtml).join("<br/>")}</div>
+    `;
   }
 
-  // Boot do sistema
+  // bota
   document.addEventListener("DOMContentLoaded", () => {
-  const prof = carregarProfissional() || { nome: "BTX" };
-  entrarNoSistema(prof);      // ✅ entra direto
-  setDatasPadrao();
-});
-
-      if (prof && prof.nome) {
-        entrarNoSistema(prof);
-      }
-
-      setDatasPadrao();
-    } catch (e) {
-      console.error("Erro no boot:", e);
-    }
+    const prof = carregarProfissional();
+    if (prof && prof.nome) entrarNoSistema(prof);
+    setDatasPadrao();
   });
 </script>
+
 </body>
 </html>
-
