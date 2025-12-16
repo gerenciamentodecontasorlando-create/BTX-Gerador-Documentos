@@ -1379,14 +1379,22 @@
     $("previewConteudo").innerHTML = html;
 
     // assinatura + dados profissional
-    const profLinhas = [
-      profissional.nome,
-      profissional.especialidade,
-      (profissional.conselho || profissional.registro) ? `${profissional.conselho || ""} ${profissional.registro || ""}`.trim() : "",
-      profissional.endereco,
-      profissional.telefone,
-      profissional.email
-    ].filter(Boolean);
+  const profLinhas = [
+  profissional?.nome,
+  profissional?.especialidade,
+  (profissional?.conselho || profissional?.registro)
+    ? `${profissional?.conselho || ""} ${profissional?.registro || ""}`.trim()
+    : "",
+  profissional?.endereco,
+  profissional?.telefone,
+  profissional?.email
+].filter(Boolean);
+
+$("previewAssinatura").innerHTML =
+  `<div style="margin-top: 1.8rem;">
+     <div>${profLinhas.map(escapeHtml).join("<br/>")}</div>
+   </div>`;
+
 <script>
   // Registra o Service Worker (PWA)
   if ("serviceWorker" in navigator) {
